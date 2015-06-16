@@ -40,6 +40,20 @@ app.factory('posts', ['$http', function($http){
       o.posts.push(data);
     });
   };
+
+  o.upvote = function(post) {
+  return $http.put('/posts/' + post._id + '/upvote')
+    .success(function(data){
+      post.upvotes += 1;
+    });
+  };
+
+  o.get = function(id){
+    return $http.get('/posts/' + id).then(function(res){
+      return res.data;
+    });
+  };
+    
     return o;
 
   }])
